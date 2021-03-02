@@ -9,9 +9,12 @@ public interface SubscriptionService {
 	
 	public int addSub(Subscription sub);
 	public Subscription findSub(int subId);
+	public List<Subscription> getAllSubs();
+	public void updateSubType(int subId, String type);
+	public void updateSubPrice(int subId, float price);
 	public void affectSubToSeller(int subId, int sellerId);
 	public void affectSubToBuyer(int subId, int buyerId);
-	public List<Subscription> getAllSubs();
+	
 	public long getSubNumberJPQL();
 	public void deleteSub(int subId);
 	
