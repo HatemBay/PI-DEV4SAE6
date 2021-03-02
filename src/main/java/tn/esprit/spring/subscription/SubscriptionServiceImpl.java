@@ -2,12 +2,18 @@ package tn.esprit.spring.subscription;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService{
-
+	
+	private static final Logger LOG = LoggerFactory.getLogger("LOG");
+	
 	@Autowired
 	SubscriptionRepository sr;
 
@@ -22,6 +28,25 @@ public class SubscriptionServiceImpl implements SubscriptionService{
 	}
 	
 	@Override
+	public List<Subscription> getAllSubs() {
+		return sr.findAll();
+	}
+	
+	@Override
+	public void updateSubType(int subId, String type) {
+		Subscription oldSub = findSub(subId);
+		oldSub.setType(Type.valueOf(type.toUpperCase()));
+		addSub(oldSub);
+	}
+	
+	@Override
+	public void updateSubPrice(int subId, float price) {
+		Subscription oldSub = findSub(subId);
+		oldSub.setPrice(price);
+		addSub(oldSub);
+	}
+	
+	@Override
 	public void affectSubToSeller(int subId, int sellerId) {
 		// TODO Auto-generated method stub
 		
@@ -33,10 +58,6 @@ public class SubscriptionServiceImpl implements SubscriptionService{
 		
 	}
 
-	@Override
-	public List<Subscription> getAllSubs() {
-		return sr.findAll();
-	}
 
 	@Override
 	public long getSubNumberJPQL() {
@@ -48,6 +69,10 @@ public class SubscriptionServiceImpl implements SubscriptionService{
 	public void deleteSub(int subId)   {	
 		sr.deleteById(subId);		
 	}
+
+	
+
+	
 
 	
 
