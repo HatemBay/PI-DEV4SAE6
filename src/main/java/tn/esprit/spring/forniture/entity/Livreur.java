@@ -1,4 +1,4 @@
-package tn.esprit.spring.entity;
+package tn.esprit.spring.forniture.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;

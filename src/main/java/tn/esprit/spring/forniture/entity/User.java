@@ -1,4 +1,4 @@
-package tn.esprit.spring.entity;
+package tn.esprit.spring.forniture.entity;
 
 
 
@@ -135,7 +135,7 @@ public class User implements Serializable {
 	}
 	
 	
-	//youssef
+	// associations
 
 	@OneToMany(mappedBy="idUser",fetch = FetchType.LAZY)
 	@JsonIgnore
