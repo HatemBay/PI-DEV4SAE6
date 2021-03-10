@@ -47,11 +47,15 @@ public class SubscriptionController {
 		ss.updateSubPrice(subId, price);
 	}
 	
+	@PostMapping("/subs/update-start-date/{subId}/{date}")
+	public void updateSubStartDate(@PathVariable int subId, @PathVariable String date){
+		LOG.info("Start-date updated");
+		ss.updateSubStartDate(subId, date);
+	}
+	
 	@DeleteMapping("/subs/delete/{subId}")
 	public void deleteSub(@PathVariable int subId){
 		ss.deleteSub(subId);
 	}
 	
-	
-
 }

@@ -12,6 +12,7 @@ public interface SubscriptionService {
 	public List<Subscription> getAllSubs();
 	public void updateSubType(int subId, String type);
 	public void updateSubPrice(int subId, float price);
+	public void updateSubStartDate(int subId, String date);
 	public void affectSubToSeller(int subId, int sellerId);
 	public void affectSubToBuyer(int subId, int buyerId);
 	

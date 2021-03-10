@@ -1,6 +1,9 @@
+
 package tn.esprit.spring.subscription;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +31,14 @@ public class Subscription implements Serializable {
 	private Type type;
 	
 	private float price;
+	
+    private LocalDate startDate;
+     
+    private LocalDate finishDate;
+    
+	private boolean fidelity;
+	
+	
 
 	//private String mail;
 
@@ -36,6 +47,34 @@ public class Subscription implements Serializable {
 //	@OneToOne
 //	@JoinColumn(name = "u", referencedColumnName = "id")
 //	private User user;
+	
+
+
+	public Subscription(Type type, float price, boolean fidelity) {
+		super();
+		
+		this.type = type;
+		this.price = price;
+		this.startDate = LocalDate.now();
+		this.finishDate = LocalDate.now().plusYears(1);
+		this.fidelity = fidelity;
+		if(fidelity)
+			this.price = price -((price * 15)/100);
+	}
+	
+	public Subscription(Type type, float price) {
+		super();
+		this.type = type;
+		this.price = price;
+		this.startDate = LocalDate.now();
+		this.finishDate = LocalDate.now().plusYears(1);
+		this.fidelity = false;
+	}
+	
+	public Subscription() {
+		super();
+	}
+	
 
 	public float getPrice() {
 		return price;
@@ -66,11 +105,31 @@ public class Subscription implements Serializable {
 		return serialVersionUID;
 	}
 
-	@Override
-	public String toString() {
-		return "Subscription [subId=" + subId + ", type=" + type + ", price=" + price + "]";
+	public boolean getFidelity() {
+		return fidelity;
 	}
 
+	public void setFidelity(boolean fidelity) {
+		this.fidelity = fidelity;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getFinishDate() {
+		return finishDate;
+	}
+
+	public void setFinishDate(LocalDate finishDate) {
+		this.finishDate = finishDate;
+	}
+	
+	
 
 
 }
