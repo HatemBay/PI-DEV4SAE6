@@ -7,16 +7,39 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.user.UserRepository;
+
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
 	SubscriptionRepository sr;
 
+	@Autowired
+	UserRepository ur;
+
+	// @Scheduled(fixedDelay = 10000)
+	// public void scheduleStatus() {
+	// System.out.println("sub expired");
+	// }
+	//
 	@Override
 	public int addSub(Subscription sub) {
-		sub.setStartDate(LocalDate.now());
-		sub.setFinishDate(LocalDate.now().plusYears(1));
+		if (sub.getStartDate() == null) {
+			sub.setStartDate(LocalDate.now());
+			sub.setFinishDate(LocalDate.now().plusYears(1));
+			sub.setState(1);
+		}
+		if (sub.getDuration() <= 3) {
+			sub.setPrice(15);
+		} else if (sub.getDuration() <= 6) {
+			sub.setPrice(25);
+		} else if (sub.getDuration() <= 12) {
+			sub.setPrice(30);
+		}
+		if (sub.getSurveillance() == 1) {
+			sub.setPrice(sub.getPrice() + 5);
+		}
 		return sr.save(sub).getSubId();
 	}
 
@@ -31,14 +54,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public void updateSubType(int subId, String type) {
-		Subscription oldSub = findSub(subId);
-		oldSub.setType(Type.valueOf(type.toUpperCase()));
-		addSub(oldSub);
-	}
-
-	@Override
-	public void updateSubPrice(int subId, float price) {
+	public void updateSubPrice(int subId, double price) {
 		Subscription oldSub = findSub(subId);
 		oldSub.setPrice(price);
 		addSub(oldSub);
@@ -51,13 +67,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		Subscription oldSub = findSub(subId);
 		oldSub.setStartDate(localDate);
 		addSub(oldSub);
-
-	}
-
-	@Override
-	public void affectSubToSeller(int subId, int sellerId) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -67,10 +76,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public long getSubNumberJPQL() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getSubNumber() {
+		return sr.count();
 	}
+	//
+	// @Override
+	// public long getSubNumberByType(String type) {
+	// // TODO Auto-generated method stub
+	// return sr.getSubNumberByType(type.toUpperCase());
+	// }
 
 	@Override
 	public void deleteSub(int subId) {

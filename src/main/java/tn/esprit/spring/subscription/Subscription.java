@@ -3,16 +3,21 @@ package tn.esprit.spring.subscription;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import lombok.Data;
+import tn.esprit.spring.stripe.ChargeRequest;
+import tn.esprit.spring.user.User;
 
 @Entity
+@Data
 public class Subscription implements Serializable {
 
 	/**
@@ -25,111 +30,31 @@ public class Subscription implements Serializable {
 	@Column(name = "id")
 	private int subId;
 
-	//private String name;
+	// private String name;
 
-	@Enumerated
-	private Type type;
-	
-	private float price;
-	
-    private LocalDate startDate;
-     
-    private LocalDate finishDate;
-    
+	private int duration;
+
+	private double price;
+
+	private LocalDate startDate;
+
+	private LocalDate finishDate;
+
 	private boolean fidelity;
-	
-	
 
-	//private String mail;
+	private int surveillance;
 
-	//private String country;
-	
-//	@OneToOne
-//	@JoinColumn(name = "u", referencedColumnName = "id")
-//	private User user;
-	
+	private int state;
 
+	@OneToOne(mappedBy = "subscription")
+	private ChargeRequest chargeRequest;
 
-	public Subscription(Type type, float price, boolean fidelity) {
-		super();
-		
-		this.type = type;
-		this.price = price;
-		this.startDate = LocalDate.now();
-		this.finishDate = LocalDate.now().plusYears(1);
-		this.fidelity = fidelity;
-		if(fidelity)
-			this.price = price -((price * 15)/100);
-	}
-	
-	public Subscription(Type type, float price) {
-		super();
-		this.type = type;
-		this.price = price;
-		this.startDate = LocalDate.now();
-		this.finishDate = LocalDate.now().plusYears(1);
-		this.fidelity = false;
-	}
-	
-	public Subscription() {
-		super();
-	}
-	
+	// private String mail;
 
-	public float getPrice() {
-		return price;
-	}
+	// private String country;
 
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public int getSubId() {
-		return subId;
-	}
-
-	public void setSubId(int subId) {
-		this.subId = subId;
-	}
-
-	public Type getType() {
-		return type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
-	}
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public boolean getFidelity() {
-		return fidelity;
-	}
-
-	public void setFidelity(boolean fidelity) {
-		this.fidelity = fidelity;
-	}
-
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-
-	public LocalDate getFinishDate() {
-		return finishDate;
-	}
-
-	public void setFinishDate(LocalDate finishDate) {
-		this.finishDate = finishDate;
-	}
-	
-	
-
+	@OneToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
 
 }

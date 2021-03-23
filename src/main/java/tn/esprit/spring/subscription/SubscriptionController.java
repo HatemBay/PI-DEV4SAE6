@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,19 +36,13 @@ public class SubscriptionController {
 		return ss.getAllSubs();
 	}
 	
-	@PostMapping("/subs/update-type/{subId}/{type}")
-	public void updateSubType(@PathVariable int subId, @PathVariable String type){
-		LOG.info("Subscription updated");
-		ss.updateSubType(subId, type);
-	}
-	
-	@PostMapping("/subs/update-price/{subId}/{price}")
-	public void updateSubPrice(@PathVariable int subId, @PathVariable float price){
+	@PutMapping("/subs/update-price/{subId}/{price}")
+	public void updateSubPrice(@PathVariable int subId, @PathVariable double price){
 		LOG.info("Price updated");
 		ss.updateSubPrice(subId, price);
 	}
 	
-	@PostMapping("/subs/update-start-date/{subId}/{date}")
+	@PutMapping("/subs/update-start-date/{subId}/{date}")
 	public void updateSubStartDate(@PathVariable int subId, @PathVariable String date){
 		LOG.info("Start-date updated");
 		ss.updateSubStartDate(subId, date);

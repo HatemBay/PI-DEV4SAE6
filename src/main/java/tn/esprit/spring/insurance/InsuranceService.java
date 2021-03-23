@@ -6,18 +6,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface InsuranceService {
-	
+
 	public int addInsurance(Insurance ins);
+
 	public Insurance findInsurance(int insId);
+
 	public List<Insurance> getAllInsurances();
-	public void updateInsurancePrice(int insId, float price);
-	public void updateInsuranceCategory(int insId, String category);
-	public void updateInsurancePartner(int insId, String partner);	
-	public void affectInsuranceToSeller(int insId, int sellerId);
+
+	public void updateInsurancePrice(int insId, double price);
+
+	public void updateInsurancePartner(int insId, String partner);
+
 	public void affectInsuranceToBuyer(int insId, int buyerId);
+
+	public long getInsuranceNumber();
 	
-	public long getInsurancesNumberJPQL();
-	public void deleteInsurance(int serId);
+	//***************************JPQL***************************
+	public long getInsuranceNumberByPartner(String partner);
+
+	//**********************************************************
 	
+	public double getInsurancePercentByPartner(String partner);
+	
+	public void deleteInsurance(int insId);
 
 }
