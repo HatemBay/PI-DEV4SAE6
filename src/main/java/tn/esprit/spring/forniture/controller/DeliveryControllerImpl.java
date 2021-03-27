@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.forniture.entity.Delivery;
@@ -30,7 +31,14 @@ IDeliveyService deliveryservice;
 	return del;
 	}
 	
+	/*
+	{
+        "deliveryId": 3,
+        "customerName": "faysel",
+        "description": "delivery to ben arous",
+        "stateDelivery": "Approved"}
 	
+	*/
 	
 
 	// http://localhost:8081/SpringMVC/servlet/AllDel
@@ -62,7 +70,16 @@ IDeliveyService deliveryservice;
 			}
 
 
+			@PutMapping("/affecterLivraisonALivreur/{idLivreur}/{idDelivery}")
+			@ResponseBody
+			public void affecterLivraisonALivreur(@PathVariable ("idLivreur")long idLivreur, @PathVariable ("idDelivery") long idDelivery){
+				
+				
+				deliveryservice.affecterLivraisonALivreur(idLivreur, idDelivery);
 
+
+			    
+			}
 
 
 

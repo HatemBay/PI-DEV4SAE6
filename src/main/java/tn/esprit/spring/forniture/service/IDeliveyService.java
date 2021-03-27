@@ -12,7 +12,7 @@ public interface IDeliveyService {
 	public  Delivery updateDelivery(Delivery delivery);
 	
 	
-	
+	public void affecterLivraisonALivreur(Long idLivreur,long idDelivery);
 	
 	
 

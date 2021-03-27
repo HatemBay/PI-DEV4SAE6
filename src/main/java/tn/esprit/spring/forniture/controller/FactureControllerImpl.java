@@ -31,6 +31,16 @@ public class FactureControllerImpl {
 			}
 
 			
+			/* 
+			 * {
+        "id": 1,
+        "montant": 800.0,
+        "date_de_depart": "2021-03-12T00:00:00.000+00:00",
+        "type": "achat"
+    }
+    
+    */
+			
 			
 			// Ajouter Factures : http://localhost:8081/SpringMVC/servlet/add-Facture
 			
@@ -58,6 +68,23 @@ public class FactureControllerImpl {
 			
 	
 	
+			
+			
+			// URL : http://localhost:8081/SpringMVC/servlet/affecterCommande_A_Facture
+			   @PutMapping(value = "affecterCommande_A_Facture/{idf}/{idc}")
+				public void affecterCommande_A_Facture(@PathVariable("idf")int idFacture,@PathVariable("idc")int idCommande){
+				   facturesService.affecterCommandeAFacture(idFacture, idCommande);;
+			   }
+			   
+			   
+			// URL : http://localhost:8081/SpringMVC/servlet/afficherPDF/{id}/{idClient}
+			   
+			   @GetMapping(value = "/afficherPDF/{id}/{idClient}")
+			   public void facturepdf (@PathVariable("id") int id,@PathVariable("idClient") long idClient) {
+				   
+				   facturesService.facturepdf(id,idClient);
+			   }
+			
 	
 	
 }

@@ -61,14 +61,6 @@ public class Furniture implements Serializable {
 
 	
 	
-	
-	//@ManyToMany
-//	@JsonIgnore
-//	private Set<LigneCommande> ligneCommande;
-	
-//	@JSONIGNORE
-//	@ONETOMANY(MAPPEDBY="IDFURNITURE",CASCADE=CASCADETYPE.ALL)
-//	PRIVATE SET<IMAGEPRODUIT> IMAGES;
 
 
 

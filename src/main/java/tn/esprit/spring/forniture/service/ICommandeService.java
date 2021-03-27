@@ -14,4 +14,16 @@ public interface ICommandeService {
 	Commande addCommande(Commande c);
 	
 	Commande updateCommande(Commande c);
+	
+	public Commande saveCommande(Long idUser,long idCart,String typePayement);
+	
+	public String addCommandeFurniture(Long idCommande,int idProduct);
+
+	public List<String> getCommandeProductNameByIdUser(Long idUser);
+
+	
+	public double prixTotaleLigneCommande(Long idCart);
+
+	
+	public double PourcentageRemiseCommande(Long idCart,Long idCmd);
 }

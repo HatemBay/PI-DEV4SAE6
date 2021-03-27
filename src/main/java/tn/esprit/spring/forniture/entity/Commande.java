@@ -50,6 +50,7 @@ public class Commande  implements Serializable {
 	
 	@OneToOne(mappedBy="commande")
 	private Factures facture;
+	
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	  private User idUser;

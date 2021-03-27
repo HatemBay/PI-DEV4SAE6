@@ -46,4 +46,11 @@ public class LivreurServiceImpl implements ILivreurService {
 		return livreurRepository.save(Liv);
 	}
 
+	@Override
+	public Iterable<Livreur> findalll() {
+		
+		
+		return livreurRepository.findAll();
+	}
+
 }
