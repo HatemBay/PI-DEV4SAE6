@@ -141,16 +141,15 @@ public class FacturesService implements IFacturesService {
 			//Commande cmd = commandeRepository.findById(f.getCommande().getId()).get();
 			List<List<String>> commandes = commandeRepository.commandeParIdclient(idClient);
 			System.out.println("ttttttttttttt" + commandes);
-//			String file_name = "C:\Users\youss\Desktop\facturePdf" + 1 + ".pdf"; C:\Users\Raef\Desktop\affiche
 			String file_name=null;
-			file_name="C:\\Users\\Raef\\Desktop\\affiche\\FACTURE_" + 1 + ".pdf";
+			file_name="C:\\Users\\Raef\\Desktop\\affiche\\FACTURE_" + idFacture + ".pdf";
 			Document document = new Document(PageSize.A4, 15, 15, 45, 30);
 
 			PdfWriter.getInstance(document, new FileOutputStream(file_name));
 
 			document.open();
 			////////////////
-			Image img = Image.getInstance("C:\\Users\\Raef\\Desktop\\raeff.jpg");
+			Image img = Image.getInstance("C:\\Users\\Raef\\Desktop\\dh.png");
 			img.setAlignment(Element.ALIGN_RIGHT);
 			img.setIndentationLeft(10);
 			img.setIndentationRight(10);

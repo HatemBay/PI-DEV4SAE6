@@ -69,7 +69,7 @@ public double getPrixTotalLigneCommande(@Param("idCart") Long idCart);
 		+ "join t_furniture f on f.furniture_id=l.furnitures_key WHERE c.id_user=1? and c.status='IN_PROGRESS'",nativeQuery = true)
 public List<List<String>> commandeParIdclient(@Param("idc")long idc);
 
-@Query(value = "SELECT * FROM t_commande WHERE id_user=1",nativeQuery = true)
+@Query(value = "SELECT * FROM t_commande WHERE id_user=?1",nativeQuery = true)
 public Commande commandeParIdclient1(@Param("idc")long idc);
 
 

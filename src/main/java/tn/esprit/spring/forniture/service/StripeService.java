@@ -22,6 +22,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.Customer;
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.Refund;
 import com.stripe.model.Token;
 
 import tn.esprit.spring.forniture.entity.ChargeRequest;
@@ -204,7 +205,16 @@ public class StripeService {
 		        params.put("description", "payement en ligne avec stripe");
 		        params.put("currency", "eur");
 		        params.put("source", token.getId());
-		        Charge charge = Charge.create(params);
+		       
+		Charge.create(params);
+		        	
+		        //	params.put(
+		        		//	  "charge",
+		        		//	  "ch_1Ia53bLl5l7ZEYZMDrrHubCm"
+		        		//	);
+
+		        		//	Refund refund = Refund.create(params);
+		   //  Refund.create(params);
 		        }
 		        
 		        }
