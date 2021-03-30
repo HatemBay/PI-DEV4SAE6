@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 import tn.esprit.spring.forniture.entity.User;
-import tn.esprit.spring.stripe.ChargeRequest;
+import tn.esprit.spring.stripe.ChargeRequestH;
 
 @Entity
 @Data
@@ -43,7 +43,7 @@ public class Insurance implements Serializable{
     
     //to remove
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "insurance")
-	private Set<ChargeRequest> chargeRequest;
+	private Set<ChargeRequestH> chargeRequest;
     
     @ManyToOne()
 	@JoinColumn(name = "user_id", referencedColumnName = "id")

@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 
 import lombok.Data;
 import tn.esprit.spring.forniture.entity.User;
-import tn.esprit.spring.stripe.ChargeRequest;
+import tn.esprit.spring.stripe.ChargeRequestH;
 
 @Entity
 @Data
@@ -47,7 +47,7 @@ public class Subscription implements Serializable {
 	private int state;
 
 	@OneToOne(mappedBy = "subscription")
-	private ChargeRequest chargeRequest;
+	private ChargeRequestH chargeRequest;
 
 	// private String mail;
 

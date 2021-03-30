@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CheckoutController {
 
 	@Autowired
-	StripeService paymentsService;
+	StripeServiceH paymentsService;
 	
 	@Value("${stripe.public.key}")
     private String stripePublicKey;

@@ -13,10 +13,10 @@ import com.stripe.model.Charge;
 public class ChargeController {
 
 	@Autowired
-    private StripeService paymentsService;
+    private StripeServiceH paymentsService;
 
     @PostMapping("/charge")
-    public String charge(ChargeRequest chargeRequest, Model model)
+    public String charge(ChargeRequestH chargeRequest, Model model)
       throws StripeException {
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(Currency.EUR);

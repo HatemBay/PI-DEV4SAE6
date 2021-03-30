@@ -17,7 +17,7 @@ import tn.esprit.spring.subscription.Subscription;
 
 @Data
 @Entity
-public class ChargeRequest {
+public class ChargeRequestH {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
