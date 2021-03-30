@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 import tn.esprit.spring.forniture.entity.User;
-import tn.esprit.spring.stripe.ChargeRequest;
+import tn.esprit.spring.stripe.ChargeRequestH;
 import tn.esprit.spring.surveillance.SurveillanceImages;
 
 @Data
@@ -49,7 +49,7 @@ public class Contract implements Serializable {
 	private int surveillance;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contract", cascade = CascadeType.ALL)
-	private Set<ChargeRequest> chargeRequest;
+	private Set<ChargeRequestH> chargeRequest;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")

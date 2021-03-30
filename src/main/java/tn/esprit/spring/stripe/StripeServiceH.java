@@ -15,7 +15,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 
 @Service
-public class StripeService {
+public class StripeServiceH {
 
 	@Autowired
 	ChargeRepository cr;
@@ -28,7 +28,7 @@ public class StripeService {
 		Stripe.apiKey = secretKey;
 	}
 
-	public Charge charge(ChargeRequest chargeRequest) throws StripeException {
+	public Charge charge(ChargeRequestH chargeRequest) throws StripeException {
 		Map<String, Object> chargeParams = new HashMap<>();
 		chargeParams.put("amount", chargeRequest.getAmount());
 		chargeParams.put("currency", chargeRequest.getCurrency());
@@ -37,15 +37,15 @@ public class StripeService {
 		return Charge.create(chargeParams);
 	}
 
-	public int addCharge(ChargeRequest charge) {
+	public int addCharge(ChargeRequestH charge) {
 		return cr.save(charge).getChargeId();
 	}
 	
-	public void addChargev(ChargeRequest charge) {
+	public void addChargev(ChargeRequestH charge) {
 		cr.save(charge);
 	}
 	
-	public List<ChargeRequest> getAllRequests(){
+	public List<ChargeRequestH> getAllRequests(){
 		return cr.findAll();
 	}
 }
