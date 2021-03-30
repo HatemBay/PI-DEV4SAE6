@@ -11,11 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 
 @Service
@@ -32,8 +28,7 @@ public class StripeService {
 		Stripe.apiKey = secretKey;
 	}
 
-	public Charge charge(ChargeRequest chargeRequest) throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
+	public Charge charge(ChargeRequest chargeRequest) throws StripeException {
 		Map<String, Object> chargeParams = new HashMap<>();
 		chargeParams.put("amount", chargeRequest.getAmount());
 		chargeParams.put("currency", chargeRequest.getCurrency());

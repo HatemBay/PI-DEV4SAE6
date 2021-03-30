@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import tn.esprit.spring.forniture.repository.UserRepository;
 import tn.esprit.spring.surveillance.SurveillanceImages;
 import tn.esprit.spring.surveillance.SurveillanceRepository;
-import tn.esprit.spring.user.UserRepository;
 
 @Service
 public class ContractServiceImpl implements ContractService {

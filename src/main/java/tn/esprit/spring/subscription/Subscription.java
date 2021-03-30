@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequest;
-import tn.esprit.spring.user.User;
 
 @Entity
 @Data
