@@ -41,6 +41,7 @@ public class Insurance implements Serializable{
 	
     private LocalDate startDate;
     
+    //to remove
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "insurance")
 	private Set<ChargeRequest> chargeRequest;
     

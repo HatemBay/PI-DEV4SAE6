@@ -42,7 +42,7 @@ public class Subscription implements Serializable {
 
 	private boolean fidelity;
 
-	private int surveillance;
+
 
 	private int state;
 

@@ -85,6 +85,12 @@ public class ContractController {
 		LOG.info("Start date updated");
 		cs.updateContractStartDate(contractId, date);
 	}
+	
+	@PutMapping("/contracts/update-surveillance/{contractId}/{surveillance}")
+	public void updateContractSurveillance(@PathVariable int contractId, @PathVariable int surveillance) {
+		LOG.info("Surveillance updated");
+		cs.updateContractSurveillance(contractId, surveillance);
+	}
 
 	@PutMapping("/contracts/update-duration/{contractId}/{duration}")
 	public void updateContractDuration(@PathVariable int contractId, @PathVariable int duration) {

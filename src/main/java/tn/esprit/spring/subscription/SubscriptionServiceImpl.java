@@ -37,9 +37,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		} else if (sub.getDuration() <= 12) {
 			sub.setPrice(30);
 		}
-		if (sub.getSurveillance() == 1) {
-			sub.setPrice(sub.getPrice() + 5);
-		}
 		return sr.save(sub).getSubId();
 	}
 
