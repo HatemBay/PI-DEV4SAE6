@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
+import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequest;
 import tn.esprit.spring.surveillance.SurveillanceImages;
-import tn.esprit.spring.user.User;
 
 @Data
 @Entity

@@ -17,8 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequest;
-import tn.esprit.spring.user.User;
 
 @Entity
 @Data
