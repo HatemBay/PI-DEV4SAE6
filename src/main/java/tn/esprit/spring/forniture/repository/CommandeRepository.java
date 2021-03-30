@@ -72,6 +72,11 @@ public List<List<String>> commandeParIdclient(@Param("idc")long idc);
 @Query(value = "SELECT * FROM t_commande WHERE id_user=?1",nativeQuery = true)
 public Commande commandeParIdclient1(@Param("idc")long idc);
 
+@Modifying   
+@Transactional
+@Query(value = "	UPDATE t_commande c set c.id_user=?1 where c.commande_id=?1", nativeQuery = true)
+
+public void affecterUserACommande(long idUser,long idCmmande );
 
 
 

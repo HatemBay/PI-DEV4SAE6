@@ -24,6 +24,6 @@ public interface ICommandeService {
 	
 	public double prixTotaleLigneCommande(Long idCart);
 
-	
+	public void affecterUserACommande( long idCommande, long idUser);
 	public double PourcentageRemiseCommande(Long idCart,Long idCmd);
 }
