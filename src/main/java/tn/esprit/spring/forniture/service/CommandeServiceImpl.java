@@ -15,6 +15,7 @@ import tn.esprit.spring.contract.ContractService;
 //import tn.esprit.spring.forniture.entity.ChargeRequest;
 import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.entity.Delivery;
+import tn.esprit.spring.forniture.entity.Factures;
 import tn.esprit.spring.forniture.entity.LigneCommande;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.forniture.repository.CommandeRepository;
@@ -65,6 +66,8 @@ public class CommandeServiceImpl implements ICommandeService {
 
 	@Autowired
 	StripeService stripeService;
+	@Autowired
+	UserRepository userRep;
 
 	@Override
 	public List<Commande> retrieveAllCommandes() {
@@ -246,6 +249,21 @@ public class CommandeServiceImpl implements ICommandeService {
 			double pourcentage = (somme);
 			return pourcentage;
 		}
+	}
+	
+	@Override                   
+	public void affecterUserACommande( long idCommande, long idUser) {
+		
+		
+		User u= userRep.findById(idUser).get();
+		
+		
+		Commande c = commandeRepository.getOne(idCommande);
+		
+		
+		c.setIdUser(u);
+		
+		commandeRepository.save(c);
 	}
 
 }

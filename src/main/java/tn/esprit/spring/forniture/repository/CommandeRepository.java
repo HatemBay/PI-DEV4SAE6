@@ -73,11 +73,11 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 			+ " join t_commande c on l.ligne_commande_id=c.ligne_commande_id "
 			+ "join t_furniture f on f.furniture_id=l.furnitures_key WHERE c.id_user=1? and c.status='IN_PROGRESS'", nativeQuery = true)
 	public List<List<String>> commandeParIdclient(@Param("idc") long idc);
+@Modifying   
+@Transactional
+@Query(value = "	UPDATE t_commande c set c.id_user=?1 where c.commande_id=?1", nativeQuery = true)
 
-	@Query(value = "SELECT * FROM t_commande WHERE id_user=?1", nativeQuery = true)
-	public Commande commandeParIdclient1(@Param("idc") long idc);
-	
-	@Query(value = "SELECT * FROM contract WHERE id_user=?1", nativeQuery = true)
-	public Commande contractParIdclient1(@Param("idc") long idc);
+public void affecterUserACommande(long idUser,long idCmmande );
+
 
 }

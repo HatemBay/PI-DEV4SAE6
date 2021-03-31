@@ -110,4 +110,11 @@ public class CommandeControllerImpl {
 			return commservice.prixTotaleLigneCommande(idCart);
 		}
 		
+		
+		
+		// URL : http://localhost:8000/affecterUser_A_Commande/{idc}/{idu}
+		   @PutMapping(value = "affecterUser_A_Commande/{idc}/{idu}")
+			public void affecterCommande_A_Facture(@PathVariable("idc")int idCommande, @PathVariable("idu")int idUser){
+			   commservice.affecterUserACommande(idCommande, idUser);
+		   }
 }
