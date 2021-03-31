@@ -8,6 +8,7 @@ public class PiDev4Sae6Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PiDev4Sae6Application.class, args);
-	}
 
+
+	}
 }
