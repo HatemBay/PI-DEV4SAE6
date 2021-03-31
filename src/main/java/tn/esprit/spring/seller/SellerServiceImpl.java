@@ -26,7 +26,7 @@ public class SellerServiceImpl implements SellerService {
 
 
 	@Override
-	public int addseller(Seller seller) {
+	public Long addseller(Seller seller) {
 		return ur.save(seller).getSellerId();
 	}
 

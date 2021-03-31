@@ -58,28 +58,20 @@ public class UserController {
 //	}
 
 	@PutMapping("/users/affect-sub-seller/{subId}/{sellerId}")
-	public void affectSubToSeller(@PathVariable int subId, @PathVariable long sellerId) {
+	public void affectSubToSeller(@PathVariable int subId, @PathVariable Long sellerId) {
 		us.affectSubToSeller(subId, sellerId);
 		LOG.info("Subscription affected to seller");
 	}
 
 	@PutMapping("/users/affect-contract-seller/{contractId}/{sellerId}")
-	public void affectContractToSeller(@PathVariable int contractId, @PathVariable long sellerId) {
+	public void affectContractToSeller(@PathVariable int contractId, @PathVariable Long sellerId) {
 		us.affectContractToSeller(contractId, sellerId);
 		LOG.info("Contract affected to seller");
 	}
 
-	@PutMapping("/users/affect-insurance-seller/{insuranceId}/{buyerId}")
-	public void affectInsuranceToSeller(@PathVariable int insuranceId, @PathVariable long buyerId) {
-		us.affectInsuranceToBuyer(insuranceId, buyerId);
-		LOG.info("Insurance affected to buyer");
-	}
 
 	// *****************JPQL*****************
-	@GetMapping("/users/nb-with-insurance")
-	public long getUserNumberWithInsurances() {
-		return us.getUserNumberWithInsurances();
-	}
+
 
 	@GetMapping("/users/nb-with-sub")
 	public long getSubbedUserNumber() {
@@ -111,6 +103,109 @@ public class UserController {
 	@GetMapping("/users/percent-with-contract")
 	public double getUserPercentWithContracts() {
 		return us.getUserPercentWithContracts();
+	}
+	
+	@PutMapping("/users/affect-off-buyer/{offerId}/{sellerId}")
+	public void affectSubToBuyer(@PathVariable int offerId, @PathVariable Long sellerId) {
+		us.affectOfferToBuyer(offerId, sellerId);
+		LOG.info("offer affected to buyer");
+	}
+	
+	@PutMapping("/users/affect-offh-buyer/{offerId}/{sellerId}")
+	public void affectOfferHToBuyer(@PathVariable int offerId, @PathVariable Long sellerId) {
+		us.affectOfferHToBuyer(offerId, sellerId);
+		LOG.info("offerH affected to buyer");
+	}
+
+
+
+	@PutMapping("/users/affect-insurance-seller/{insuranceId}/{buyerId}")
+	public void affectInsuranceToSeller(@PathVariable int insuranceId, @PathVariable Long buyerId) {
+		us.affectInsuranceToBuyer(insuranceId, buyerId);
+		LOG.info("Insurance affected to buyer");
+	}
+
+	// *****************JPQL*****************
+	@GetMapping("/users/nb-with-offer")
+	public long getUserNumberWithInsurances() {
+		return us.getUserNumberWithOffer();
+	}
+
+	
+	@GetMapping("/users/get-avg-prices")
+	public float getAvgPrices() {
+		return us.getAvgPrices();
+	}
+	
+	@GetMapping("/users/get-max-prices")
+	public float getMaxPrices() {
+		return us.getMaxPrices();
+	}
+	
+	@GetMapping("/users/get-min-prices")
+	public float getMinPrices() {
+		return us.getMinPrices();
+	}
+	
+	@GetMapping("/users/get-avg-space")
+	public float getAvgSpace() {
+		return us.getAvgSpace();
+	}
+	
+	@GetMapping("/users/get-min-space")
+	public float getMinSpace() {
+		return us.getMinSpace();
+	}
+	
+	@GetMapping("/users/get-max-space")
+	public float getMaxSpace() {
+		return us.getMaxSpace();
+	}
+	
+	@GetMapping("/users/get-avg-price-user/{id}")
+	public float getAvgPricePerUser(@PathVariable int id) {
+		return us.getAvgPricePerUser(id);
+	}
+	
+	@GetMapping("/users/get-min-price-user/{id}")
+	public float getMinPricePerUser(@PathVariable int id) {
+		return us.getMinPricePerUser(id);
+	}
+	
+	@GetMapping("/users/get-max-price-user/{id}")
+	public float getMaxPricePerUser(@PathVariable int id) {
+		return us.getMaxPricePerUser(id);
+	}
+	
+	@GetMapping("/users/get-avg-space-user/{id}")
+	public float getAvgSpacePerUser(@PathVariable int id) {
+		return us.getAvgSpacePerUser(id);
+	}
+	
+	@GetMapping("/users/get-min-space-user/{id}")
+	public float getMinSpacePerUser(@PathVariable int id) {
+		return us.getMinSpacePerUser(id);
+	}
+	
+	@GetMapping("/users/get-max-space-user/{id}")
+	public float getMaxSpacePerUser(@PathVariable int id) {
+		return us.getMaxSpacePerUser(id);
+	}
+	
+	@GetMapping("/users/get-pool-number/{pool}")
+	public float getPoolNumber(@PathVariable String pool) {
+		return us.getPoolNumber(pool);
+	}
+	
+	
+	// **************************************
+
+
+
+	// *****************Percentages*****************
+	@GetMapping("/users/percent-with-offer")
+	public double getUserPercentWithOffers() {
+		return us.getUserPercentWithOffers();
 	}
 	// *********************************************
 

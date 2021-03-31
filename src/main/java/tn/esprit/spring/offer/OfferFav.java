@@ -1,6 +1,7 @@
 package tn.esprit.spring.offer;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import tn.esprit.spring.user.User;
+
 
 @Entity
 public class OfferFav implements Serializable {
@@ -105,6 +106,7 @@ public class OfferFav implements Serializable {
 		this.airC = airC;
 		this.pool = pool;
 		this.user = user;
+		
 	}
 	
 	
@@ -113,6 +115,13 @@ public class OfferFav implements Serializable {
 	public OfferFav(int offerId,String name) {
 		this.offerId=offerId;
 		this.name = name;
+	}
+
+
+
+	public OfferFav(Type type2, float price2, String adress2, String name2, String description2, int chamNb2,
+			int space2, int levelNb2, Date startD2, Date endD2, AirC airC2, Pool pool2, Long id) {
+		// TODO Auto-generated constructor stub
 	}
 
 

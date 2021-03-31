@@ -9,7 +9,7 @@ import tn.esprit.spring.offer.Offer;
 
 public interface SellerService {
 
-	public int addseller(Seller seller);
+	public Long addseller(Seller seller);
 
 	public Seller findseller(int sellerId);
 	

@@ -77,7 +77,7 @@ public class OfferServiceImpl implements OfferService{
 		offerFav.setPrice(offer.getPrice());
 		offerFav.setLevelNb(offer.getLevelNb());*/
 		OfferFav offer2 = new OfferFav(offer.getType(),offer.getPrice(),offer.getAdress(),offer.getName(),offer.getDescription(),
-				offer.getChamNb(),offer.getSpace(),offer.getLevelNb(),offer.getStartD(),offer.getEndD(),offer.getAirC(),offer.getPool(),offer.getUser().getUserId());
+				offer.getChamNb(),offer.getSpace(),offer.getLevelNb(),offer.getStartD(),offer.getEndD(),offer.getAirC(),offer.getPool(),offer.getUser().getId());
 		
 		sff.addOffer(offer2);
 		

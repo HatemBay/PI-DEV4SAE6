@@ -26,7 +26,7 @@ public class SellerController {
 	private static final Logger LOG = LoggerFactory.getLogger("LOG");
 
 	@PostMapping("/sellers/add")
-	public int newseller(@RequestBody Seller seller) {
+	public Long newseller(@RequestBody Seller seller) {
 		return us.addseller(seller);
 	}
 
