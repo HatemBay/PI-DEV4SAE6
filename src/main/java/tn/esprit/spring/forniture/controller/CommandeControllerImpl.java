@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.repository.CommandeRepository;
+import tn.esprit.spring.forniture.service.CommandeServiceImpl;
 import tn.esprit.spring.forniture.service.ICommandeService;
 
 @RestController
@@ -22,6 +23,9 @@ public class CommandeControllerImpl {
 	
 	@Autowired
 	ICommandeService commservice;
+	
+	@Autowired
+	CommandeServiceImpl commandeService;
 	
 	@Autowired
 	CommandeRepository commandeRepository;
@@ -86,6 +90,14 @@ public class CommandeControllerImpl {
 		   return   commservice.addCommandeFurniture(idCommande, idProduct);
 			
 		}
+		
+		@PutMapping(value = "/add-commande-contract/{idCommande}/{idContract}") 
+		public String addCommandeContract(@PathVariable("idCommande") long idCommande, @PathVariable("idContract") int idContract){
+		   return   commandeService.addCommandeContract(idCommande, idContract);
+			
+		}
+		
+		
 		@GetMapping(value = "/getCommandeProductNameByIdUser/{idUser}")
 		@ResponseBody
 		public List<String> getCommandeProductNameByIdUser(@PathVariable("idUser") Long idUser){

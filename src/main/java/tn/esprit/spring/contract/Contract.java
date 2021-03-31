@@ -14,11 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
+import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequestH;
 import tn.esprit.spring.surveillance.SurveillanceImages;
@@ -47,6 +49,8 @@ public class Contract implements Serializable {
 	private double totalPrice;
 	
 	private int surveillance;
+	
+	private int payed;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contract", cascade = CascadeType.ALL)
 	private Set<ChargeRequestH> chargeRequest;
@@ -57,5 +61,8 @@ public class Contract implements Serializable {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contract", cascade = CascadeType.ALL)
 	private Set<SurveillanceImages> surveillanceImages;
+	
+	@OneToOne
+	private Commande commande;
 
 }

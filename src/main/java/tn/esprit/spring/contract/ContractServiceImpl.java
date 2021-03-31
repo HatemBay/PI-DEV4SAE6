@@ -29,6 +29,14 @@ public class ContractServiceImpl implements ContractService {
 		if (contract.getStartDate() == null) {
 			contract.setStartDate(LocalDate.now());
 		}
+		contract.setPayed(0);
+		if (contract.getDuration() <= 3) {
+			contract.setPrice(15);
+		} else if (contract.getDuration() <= 6) {
+			contract.setPrice(25);
+		} else if (contract.getDuration() <= 12) {
+			contract.setPrice(30);
+		}
 		contract.setTotalPrice(contract.getPrice() * 0.01);
 
 		if (contract.getSurveillance() == 1) {
@@ -51,6 +59,13 @@ public class ContractServiceImpl implements ContractService {
 	public void updateContractPrice(int contractId, float price) {
 		Contract oldContract = findContract(contractId);
 		oldContract.setPrice(price);
+		addContract(oldContract);
+	}
+	
+	@Override
+	public void setContractPayed(int contractId) {
+		Contract oldContract = findContract(contractId);
+		oldContract.setPayed(1);
 		addContract(oldContract);
 	}
 
