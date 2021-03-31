@@ -53,6 +53,7 @@ public class ChargeController {
 	public void newPayment(@PathVariable int contractId, @RequestBody ChargeRequestH chargeRequest) {
 		// chargeRequest.setDescription("Example charge");
 		chargeRequest.setCurrency(Currency.TND);
+		contractService.setContractPayed(contractId);
 		User u = contractService.findContract(contractId).getUser();
 		System.out.println(u);
 		chargeRequest.setStripeEmail(u.getEmail());

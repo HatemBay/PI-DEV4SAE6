@@ -79,7 +79,7 @@ public class ContractController {
 		LOG.info("Price updated");
 		cs.updateContractPrice(contractId, price);
 	}
-
+	
 	@PutMapping("/contracts/update-start-date/{contractId}/{date}")
 	public void updateContractStartDate(@PathVariable int contractId, @PathVariable String date) {
 		LOG.info("Start date updated");

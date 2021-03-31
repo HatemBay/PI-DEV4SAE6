@@ -78,7 +78,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	
 	@Modifying
 	@Transactional
-	@Query(value = "	UPDATE t_commande c set c.id_user=?1 where c.commande_id=?1", nativeQuery = true)
+	@Query(value = "UPDATE t_commande c set c.id_user=?1 where c.commande_id=?1", nativeQuery = true)
 	public void affecterUserACommande(long idUser, long idCmmande);
 
 }
