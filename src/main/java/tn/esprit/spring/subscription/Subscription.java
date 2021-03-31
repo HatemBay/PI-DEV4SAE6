@@ -1,15 +1,24 @@
+
 package tn.esprit.spring.subscription;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import lombok.Data;
+import tn.esprit.spring.forniture.entity.Commande;
+import tn.esprit.spring.forniture.entity.User;
+import tn.esprit.spring.stripe.ChargeRequestH;
 
 @Entity
+@Data
 public class Subscription implements Serializable {
 
 	/**
@@ -22,55 +31,32 @@ public class Subscription implements Serializable {
 	@Column(name = "id")
 	private int subId;
 
-	//private String name;
+	// private String name;
 
-	@Enumerated
-	private Type type;
+	private int duration;
+
+	private double price;
+
+	private LocalDate startDate;
+
+	private LocalDate finishDate;
+
+	private boolean fidelity;
+
+	private int state;
+
+	@OneToOne(mappedBy = "subscription")
+	private ChargeRequestH chargeRequest;
+
+	// private String mail;
+
+	// private String country;
+
+	@OneToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
 	
-	private float price;
-
-	//private String mail;
-
-	//private String country;
-	
-//	@OneToOne
-//	@JoinColumn(name = "u", referencedColumnName = "id")
-//	private User user;
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public int getSubId() {
-		return subId;
-	}
-
-	public void setSubId(int subId) {
-		this.subId = subId;
-	}
-
-	public Type getType() {
-		return type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
-	}
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
-	public String toString() {
-		return "Subscription [subId=" + subId + ", type=" + type + ", price=" + price + "]";
-	}
-
-
+	@OneToOne
+	private Commande commande;
 
 }
