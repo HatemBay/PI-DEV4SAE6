@@ -18,13 +18,12 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	@Query(value = "INSERT INTO `t_commande_furnitures`(`commande_id`, `furnitures_furniture_id`) "
 			+ "VALUES (:idCommande,:idProduct)", nativeQuery = true)
 	public int setCommandeFurniture(@Param("idCommande") Long idCommande, @Param("idProduct") Integer idProduct);
-	
+
 	@Transactional
 	@Modifying
 	@Query(value = "INSERT INTO `contract`(`id`,`commande_id`) "
 			+ "VALUES (:idCommande, :idProduct)", nativeQuery = true)
-	public int setCommandeContract(@Param("idCommande") Long idCommande,@Param("idProduct") int idProduct);
-	
+	public int setCommandeContract(@Param("idCommande") Long idCommande, @Param("idProduct") int idProduct);
 
 	//
 
@@ -73,11 +72,13 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 			+ " join t_commande c on l.ligne_commande_id=c.ligne_commande_id "
 			+ "join t_furniture f on f.furniture_id=l.furnitures_key WHERE c.id_user=1? and c.status='IN_PROGRESS'", nativeQuery = true)
 	public List<List<String>> commandeParIdclient(@Param("idc") long idc);
-@Modifying   
-@Transactional
-@Query(value = "	UPDATE t_commande c set c.id_user=?1 where c.commande_id=?1", nativeQuery = true)
 
-public void affecterUserACommande(long idUser,long idCmmande );
-
+	@Query(value = "SELECT * FROM t_commande WHERE id_user=?1",nativeQuery = true)
+	public Commande commandeParIdclient1(@Param("idc")long idc);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "	UPDATE t_commande c set c.id_user=?1 where c.commande_id=?1", nativeQuery = true)
+	public void affecterUserACommande(long idUser, long idCmmande);
 
 }
