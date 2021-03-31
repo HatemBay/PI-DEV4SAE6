@@ -1,6 +1,7 @@
 package tn.esprit.spring.offer;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,8 +20,9 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
+import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.seller.Seller;
-import tn.esprit.spring.user.User;
+
 
 @Entity
 @Data

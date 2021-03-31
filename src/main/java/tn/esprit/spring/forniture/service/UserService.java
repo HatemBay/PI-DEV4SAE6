@@ -1,13 +1,15 @@
-package tn.esprit.spring.user;
+package tn.esprit.spring.forniture.service;
 
 import java.util.List;
 
 
 import org.springframework.data.repository.query.Param;
 
+import tn.esprit.spring.forniture.entity.User;
+
 public interface UserService {
 
-	public int addUser(User user);
+	public Long addUser(User user);
 
 	public User findUser(int userId);
 	
