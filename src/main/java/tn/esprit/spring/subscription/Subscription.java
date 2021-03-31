@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequestH;
 
@@ -42,8 +43,6 @@ public class Subscription implements Serializable {
 
 	private boolean fidelity;
 
-
-
 	private int state;
 
 	@OneToOne(mappedBy = "subscription")
@@ -56,5 +55,8 @@ public class Subscription implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
+	
+	@OneToOne
+	private Commande commande;
 
 }

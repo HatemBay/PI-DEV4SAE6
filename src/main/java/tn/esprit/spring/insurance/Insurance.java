@@ -15,8 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
+import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequestH;
 
@@ -48,5 +50,8 @@ public class Insurance implements Serializable{
     @ManyToOne()
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
+    
+    @OneToOne
+	private Commande commande;
     
 }

@@ -13,6 +13,8 @@ public interface ContractService {
 	public List<Contract> getAllContracts();
 
 	public void updateContractPrice(int contractId, float price);
+	
+	public void setContractPayed(int contractId);
 
 	public void updateContractStartDate(int contractId, String date);
 	

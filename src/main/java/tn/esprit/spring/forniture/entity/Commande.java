@@ -20,6 +20,10 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import tn.esprit.spring.contract.Contract;
+import tn.esprit.spring.insurance.Insurance;
+import tn.esprit.spring.subscription.Subscription;
+
 @Entity
 @Table(name = "T_COMMANDE")
 public class Commande  implements Serializable {
@@ -50,6 +54,15 @@ public class Commande  implements Serializable {
 	
 	@OneToOne(mappedBy="commande")
 	private Factures facture;
+	
+	@OneToOne(mappedBy = "commande")
+	private Subscription sub;
+	
+	@OneToOne(mappedBy = "commande")
+	private Contract contract;
+	
+	@OneToOne(mappedBy = "commande")
+	private Insurance insurance;
 	
 	@ManyToOne
 	@JoinColumn(name="idUser")

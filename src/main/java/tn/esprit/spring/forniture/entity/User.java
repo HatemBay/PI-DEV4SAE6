@@ -1,8 +1,5 @@
 package tn.esprit.spring.forniture.entity;
 
-
-
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -18,29 +15,44 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import tn.esprit.spring.contract.Contract;
+import tn.esprit.spring.insurance.Insurance;
+import tn.esprit.spring.subscription.Subscription;
+
 @Entity
 public class User implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)	
-	private Long id;   
-	
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	private String FirstName;
-	
+
 	private String Lastname;
 
 	private Date dateNaissance;
 	private String Email;
 	private String Password;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private Subscription sub;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+	//@Fetch(value=FetchMode.SELECT)
+	private Set<Contract> contracts;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Insurance> insurances;
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", FirstName=" + FirstName + ", Lastname=" + Lastname + ", dateNaissance="
 				+ dateNaissance + ", Email=" + Email + ", Password=" + Password + "]";
 	}
+
 	public User(Long id, String firstName, String lastname, Date dateNaissance, String email, String password) {
 		super();
 		this.id = id;
@@ -50,48 +62,84 @@ public class User implements Serializable {
 		Email = email;
 		Password = password;
 	}
-	
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getFirstName() {
 		return FirstName;
 	}
+
 	public void setFirstName(String firstName) {
 		FirstName = firstName;
 	}
+
 	public String getLastname() {
 		return Lastname;
 	}
+
 	public void setLastname(String lastname) {
 		Lastname = lastname;
 	}
+
 	public Date getDateNaissance() {
 		return dateNaissance;
 	}
+
 	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
+
 	public String getEmail() {
 		return Email;
 	}
+
 	public void setEmail(String email) {
 		Email = email;
 	}
+
 	public String getPassword() {
 		return Password;
 	}
+
 	public void setPassword(String password) {
 		Password = password;
 	}
-	
+
+	public Subscription getSub() {
+		return sub;
+	}
+
+	public void setSub(Subscription sub) {
+		this.sub = sub;
+	}
+
+	public Set<Contract> getContracts() {
+		return contracts;
+	}
+
+	public void setContracts(Set<Contract> contracts) {
+		this.contracts = contracts;
+	}
+
+	public Set<Insurance> getInsurances() {
+		return insurances;
+	}
+
+	public void setInsurances(Set<Insurance> insurances) {
+		this.insurances = insurances;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -133,43 +181,31 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 	// associations
 
-	@OneToMany(mappedBy="idUser",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "idUser", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Commande> commandes;
-	
-	@OneToOne(mappedBy="user")
-	@JsonIgnore
-	private  LigneCommande ligneCommande;
 
-	
+	@OneToOne(mappedBy = "user")
+	@JsonIgnore
+	private LigneCommande ligneCommande;
+
 	public List<Commande> getCommandes() {
 		return commandes;
 	}
+
 	public void setCommandes(List<Commande> commandes) {
 		this.commandes = commandes;
 	}
+
 	public LigneCommande getLigneCommande() {
 		return ligneCommande;
 	}
+
 	public void setLigneCommande(LigneCommande ligneCommande) {
 		this.ligneCommande = ligneCommande;
 	}
 
-
-	
-	
-	
-	
-
 }
-
-	
-	
-	
-	
-	
-	
