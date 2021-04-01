@@ -265,5 +265,35 @@ public class CommandeServiceImpl implements ICommandeService {
 		
 		commandeRepository.save(c);
 	}
+	
+	@Override 
+public void affecterLC_A_Commande( long idCommande, long idLc) {
+		
+		
+	
+	LigneCommande lc  = ligneCommandeRepository.findById(idLc).get();
+		
+		Commande c = commandeRepository.getOne(idCommande);
+		
+		
+	
+		c.setLigneCommande(lc);
+		commandeRepository.save(c);
+	}
 
+	
+	@Override
+	public void affecterLivraison_A_Commande( long idCommande, long idliv) {
+		
+		
+		Delivery del= deliveryRepository.findById(idliv).get();
+	
+			
+			Commande c = commandeRepository.getOne(idCommande);
+			
+			
+		
+			c.setDeliveries(del);
+			commandeRepository.save(c);
+		}
 }

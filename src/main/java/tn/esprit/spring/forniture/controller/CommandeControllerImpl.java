@@ -117,4 +117,21 @@ public class CommandeControllerImpl {
 			public void affecterCommande_A_Facture(@PathVariable("idc")int idCommande, @PathVariable("idu")int idUser){
 			   commservice.affecterUserACommande(idCommande, idUser);
 		   }
+		   
+
+		   
+		   
+			// URL : http://localhost:8000/affecterLC_A_Commande/{idc}/{idlc}
+			   @PutMapping(value = "affecterLC_A_Commande/{idc}/{idlc}")
+				public void affecterLC_A_Commande(@PathVariable("idc")int idCommande, @PathVariable("idlc")long idlc){
+				   commservice.affecterLC_A_Commande(idCommande, idlc);
+			   }
+		   
+			// URL : http://localhost:8000/affecterLivraison_A_Commande/{idc}/{idliv}
+			   @PutMapping(value = "affecterLivraison_A_Commande/{idc}/{idliv}")
+				public void affecterLivraison_A_Commande(@PathVariable("idc")int idCommande, @PathVariable("idliv")long idliv){
+				   commservice.affecterLivraison_A_Commande(idCommande, idliv);
+			   }
+			   
+		   
 }

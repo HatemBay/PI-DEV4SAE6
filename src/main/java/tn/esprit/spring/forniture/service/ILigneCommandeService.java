@@ -11,7 +11,7 @@ public interface ILigneCommandeService {
 	public List<LigneCommande> getAllProductByCart();
 //	public LigneCommande findLigneCommande(int idFurniture,Long idClient,Long idCommande);
 //	public List<List<String>> AjouterAuPanier(int idprod, long iduser,LigneCommande lc );
-	public LigneCommande saveLigneCommande(Long idUser);
+	public LigneCommande saveLigneCommande(long idUser);
 	public int  countFurnitureByCart (Long idCard);
 //	public Double PrixTotalCommande(long iduser);
 	
