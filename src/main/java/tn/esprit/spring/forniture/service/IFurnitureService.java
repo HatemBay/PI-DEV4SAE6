@@ -1,7 +1,7 @@
 package tn.esprit.spring.forniture.service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.primefaces.model.file.UploadedFiles;
 import tn.esprit.spring.forniture.entity.Furniture;
@@ -12,9 +12,9 @@ public interface IFurnitureService {
 	public int ajouterMeuble(Furniture furniture);
 	public List<Furniture> getAllFurniture();
 	public void deleteFurnitureById(int furnitureId);
-	public Furniture updateForniture(Furniture furniture) ;
+	public Furniture updateForniture( Furniture furiture,int id) ;
+	public Optional<Furniture> getById(int id);
 	
-
 	 public List<String> getAllFurnitureNamesJPQL();
 		public int getNombreFurnitureJPQL();
 		//public List<Furniture> getAllFurnitureByCard(ShoppingCard card);

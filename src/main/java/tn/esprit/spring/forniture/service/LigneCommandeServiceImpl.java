@@ -50,17 +50,17 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	
 	
 	@Override
-	public LigneCommande  saveLigneCommande(Long idUser) {
+	public LigneCommande  saveLigneCommande(long idUser) {
 		LigneCommande c = new LigneCommande();
 		
 
 		
 		User userMAnage = userRepository.findById(idUser).get();
-		Long d=userMAnage.getId();
-		System.out.println("aaa"+userMAnage);
+	
+	
 		
 
-		c.getUser().setId(idUser);
+		c.setUser(userMAnage);
 		
 	
 	return  ligneCommandeRepository.save(c);

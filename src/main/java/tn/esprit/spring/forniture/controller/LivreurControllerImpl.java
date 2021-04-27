@@ -1,6 +1,7 @@
 package tn.esprit.spring.forniture.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.forniture.entity.Furniture;
 import tn.esprit.spring.forniture.entity.Livreur;
 import tn.esprit.spring.forniture.service.ILivreurService;
 
@@ -41,7 +43,12 @@ public class LivreurControllerImpl {
 					
 				}
 				
-				
+				@GetMapping("/byidliv/{id}")
+				public Optional<Livreur> getById(@PathVariable("id")long id){
+					Optional<Livreur> list = livreurService.getById(id);
+					return list;
+					
+				}
 			
 				
 				// http://localhost:8081/SpringMVC/servlet/remove-Livreur/{Livreur-id}
@@ -52,10 +59,10 @@ public class LivreurControllerImpl {
 		
 				
 				// http://localhost:8081/SpringMVC/servlet/modify-Livreur
-				@PutMapping("/modify-Livreur")
-				public Livreur modifyLivreur(@RequestBody Livreur livreur) {
-				return livreurService.updateLiv(livreur);
+				@PutMapping("/modify-Livreur/{id}")
+				public Livreur modifyLivreur(@RequestBody Livreur livreur,@PathVariable("id")long id) {
+				return livreurService.updateLiv(livreur, id);
 				}
 	
-	
+				
 }

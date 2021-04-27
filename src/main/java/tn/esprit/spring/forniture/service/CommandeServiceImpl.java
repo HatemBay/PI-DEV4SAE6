@@ -2,6 +2,7 @@ package tn.esprit.spring.forniture.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,7 @@ public class CommandeServiceImpl implements ICommandeService {
 		System.out.println("bbb" + cardManag);
 		System.out.println("ccc" + nombre);
 		ZoneId zid = ZoneId.of("Africa/Tunis");
-		c.setDate(LocalDate.now(zid));
+		
 
 		commandeRepository.save(c);
 
@@ -265,5 +266,35 @@ public class CommandeServiceImpl implements ICommandeService {
 		
 		commandeRepository.save(c);
 	}
+	
+	@Override 
+public void affecterLC_A_Commande( long idCommande, long idLc) {
+		
+		
+	
+	LigneCommande lc  = ligneCommandeRepository.findById(idLc).get();
+		
+		Commande c = commandeRepository.getOne(idCommande);
+		
+		
+	
+		c.setLigneCommande(lc);
+		commandeRepository.save(c);
+	}
 
+	
+	@Override
+	public void affecterLivraison_A_Commande( long idCommande, long idliv) {
+		
+		
+		Delivery del= deliveryRepository.findById(idliv).get();
+	
+			
+			Commande c = commandeRepository.getOne(idCommande);
+			
+			
+		
+			c.setDeliveries(del);
+			commandeRepository.save(c);
+		}
 }

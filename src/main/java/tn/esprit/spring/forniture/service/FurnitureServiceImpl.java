@@ -2,6 +2,7 @@ package tn.esprit.spring.forniture.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -47,8 +48,11 @@ public class FurnitureServiceImpl implements IFurnitureService{
 	
 		return (List<Furniture>) furnitureRepository.findAll();
 	}
-
-
+	@Override
+	public Optional<Furniture> getById(int id) {
+		
+		return (Optional<Furniture>) furnitureRepository.findById(id);
+	}
 
 
 
@@ -64,8 +68,12 @@ public class FurnitureServiceImpl implements IFurnitureService{
 
 
 	@Override
-	public Furniture updateForniture(Furniture furniture) {
-		return furnitureRepository.save(furniture);
+	public Furniture updateForniture( Furniture furiture, int id) {
+		Furniture fur=	furnitureRepository.findById(id).get();
+		
+		furiture.setId(fur.getId());
+		furnitureRepository.save(furiture);
+		return furiture;
 	}
 
 
@@ -111,7 +119,7 @@ public class FurnitureServiceImpl implements IFurnitureService{
 		System.out.println(card.getFurnitures().values());
 		ligneCommandeRepository.save(card);
 		
-		return "product added";
+		return "product updated";
 	}
 
 

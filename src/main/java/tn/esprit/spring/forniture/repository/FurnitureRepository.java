@@ -36,6 +36,6 @@ public interface FurnitureRepository extends CrudRepository<Furniture, Integer>{
   
   @Query(value = "SELECT * FROM t_furniture t join ligne_commande_furnitures c "
   		+ "ON t.furniture_id=c.furnitures_key join t_commande tc"
-  		+ " on c.ligne_commande_id=tc.ligne_commande_id WHERE tc.id_user=1", nativeQuery = true)
-	public List<String> getFurnitureByCards();
+  		+ " on c.ligne_commande_id=tc.ligne_commande_id WHERE tc.id_user=?1", nativeQuery = true)
+	public List<Furniture> getFurnitureByCards(@Param("id_user") Long id_user);
 }
