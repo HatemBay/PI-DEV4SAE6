@@ -1,7 +1,7 @@
 package tn.esprit.spring.forniture.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,10 +35,10 @@ public class Commande  implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 	//@Temporal(TemporalType.DATE)
 	@CreationTimestamp
-	private LocalDate date;
+	private Date date;
 	private double montant;
 	private String status;
 	private String TypedePayment;
@@ -79,7 +79,7 @@ public class Commande  implements Serializable {
 		super();
 	}
 
-	public Commande(Long id, LocalDate date, double montant, String status, String typedePayment, String remise,
+	public Commande(Long id, Date date, double montant, String status, String typedePayment, String remise,
 			double pourcentageDeRemise, double total, LigneCommande ligneCommande, Factures facture, User idUser,
 			List<Furniture> furnitures, Delivery deliveries) {
 		super();
@@ -98,7 +98,7 @@ public class Commande  implements Serializable {
 		this.deliveries = deliveries;
 	}
 
-	public Commande(LocalDate date, double montant, String status, String typedePayment, String remise,
+	public Commande(Date date, double montant, String status, String typedePayment, String remise,
 			double pourcentageDeRemise, double total, LigneCommande ligneCommande, Factures facture, User idUser,
 			List<Furniture> furnitures, Delivery deliveries) {
 		super();
@@ -118,7 +118,7 @@ public class Commande  implements Serializable {
 	
 	
 
-	public Commande(Long id, LocalDate date, double montant, String status, String typedePayment, String remise,
+	public Commande(Long id, Date date, double montant, String status, String typedePayment, String remise,
 			double pourcentageDeRemise, double total, LigneCommande ligneCommande, Factures facture, User idUser,
 			List<Furniture> furnitures) {
 		super();
@@ -144,11 +144,11 @@ public class Commande  implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

@@ -1,6 +1,7 @@
 package tn.esprit.spring.forniture.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,15 +50,22 @@ public class FurnitureControllerImpl {
 	
 	
 	
-	// http://localhost:8081/SpringMVC/servlet/AllFurnitures
+	// http://localhost:8000/AllFurnitures
 			@GetMapping("/AllFurnitures")
 			public List<Furniture> retrieveAllFurnitures(){
 				List<Furniture> list = fornitureservice.getAllFurniture();
 				return list;
 				
 			}
-			
-	
+
+
+			// http://localhost:8000/byid/{id}
+						@GetMapping("/byid/{id}")
+						public Optional<Furniture> getById(@PathVariable("id")int id){
+							Optional<Furniture> list = fornitureservice.getById(id);
+							return list;
+							
+						}
 			
 			// http://localhost:8081/SpringMVC/servlet/remove-Furniture/{Furniture-id}
 			@DeleteMapping("/remove-Furniture/{Furniture-id}")
@@ -67,9 +75,9 @@ public class FurnitureControllerImpl {
 	
 			
 			// http://localhost:8081/SpringMVC/servlet/modify-Furniture
-			@PutMapping("/modify-Furniture")
-			public Furniture modifyFurniture(@RequestBody Furniture furniture) {
-			return fornitureservice.updateForniture(furniture);
+			@PutMapping("/modify-Furniture/{id}")
+			public Furniture modifyFurniture(@RequestBody Furniture furniture,@PathVariable("id")int id) {
+			return fornitureservice.updateForniture(furniture, id);
 			}
 			
 			
@@ -88,7 +96,7 @@ public class FurnitureControllerImpl {
 			
 			
 			
-			// http://localhost:8081/SpringMVC/servlet/addMeubleDansPanier12/{idmeuble}/{quantity}/{panierId}
+			// http://localhost:8000/addMeubleDansPanier12/{idmeuble}/{quantity}/{panierId}
 			
 			@PutMapping(value = "/addMeubleDansPanier12/{idmeuble}/{quantity}/{panierId}")
 			public String addMeubleDansPanier(@PathVariable("idmeuble") int idmeuble, @PathVariable("quantity") int quantity,
@@ -98,7 +106,7 @@ public class FurnitureControllerImpl {
 			}
 
 			
-			// http://localhost:8081/SpringMVC/servlet/incrementMeubleDansPanier12/{idmeuble}/{quantity}/{panierId}
+			// http://localhost:8000/incrementMeubleDansPanier12/{idmeuble}/{quantity}/{panierId}
 			
 			@PutMapping(value = "/incrementMeubleDansPanier12/{idmeuble}/{quantity}/{panierId}")
 			public String incrementMeubleDansPanier12(@PathVariable("idmeuble") int idmeuble,
@@ -117,7 +125,7 @@ public class FurnitureControllerImpl {
 
 			}
 
-			// http://localhost:8081/SpringMVC/servlet/getFurnitureByCard/{panierId}
+			// http://localhost:8000/getFurnitureByCard/{panierId}
 
 			@GetMapping(value = "/getFurnitureByCard/{panierId}")
 			public List<String> getFurnitureByCard(@PathVariable("panierId") long panierId) {
@@ -126,7 +134,7 @@ public class FurnitureControllerImpl {
 			}
 			
 			
-			// http://localhost:8081/SpringMVC/servlet/getNombreFurnitureJPQL
+			// http://localhost:8000/getNombreFurnitureJPQL
 
 			@GetMapping(value = "/getNombreFurnitureJPQL")
 			@ResponseBody
@@ -135,7 +143,7 @@ public class FurnitureControllerImpl {
 			}
 
 			
-			// http://localhost:8081/SpringMVC/servlet/updateQuantityFurnitureAfterCommande/{idProd}/{idCmd}
+			// http://localhost:8000/updateQuantityFurnitureAfterCommande/{idProd}/{idCmd}
 
 			@PostMapping("/updateQuantityFurnitureAfterCommande/{idProd}/{idCmd}")
 			@ResponseBody

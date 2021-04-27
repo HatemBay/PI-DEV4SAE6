@@ -2,6 +2,7 @@ package tn.esprit.spring.forniture.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,7 @@ public class CommandeServiceImpl implements ICommandeService {
 		System.out.println("bbb" + cardManag);
 		System.out.println("ccc" + nombre);
 		ZoneId zid = ZoneId.of("Africa/Tunis");
-		c.setDate(LocalDate.now(zid));
+		
 
 		commandeRepository.save(c);
 
