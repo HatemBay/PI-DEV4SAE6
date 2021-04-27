@@ -22,8 +22,13 @@ import com.stripe.model.Token;
 
 import tn.esprit.spring.contract.Contract;
 import tn.esprit.spring.contract.ContractRepository;
+import tn.esprit.spring.contract.ContractService;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.forniture.repository.UserRepository;
+import tn.esprit.spring.insurance.Insurance;
+import tn.esprit.spring.insurance.InsuranceRepository;
+import tn.esprit.spring.subscription.Subscription;
+import tn.esprit.spring.subscription.SubscriptionRepository;
 
 @Service
 public class StripeServiceH {
@@ -39,6 +44,15 @@ public class StripeServiceH {
 	
 	@Autowired
 	ContractRepository contractRepository;
+	
+	@Autowired
+	ContractService contractService;
+	
+	@Autowired
+	SubscriptionRepository subRepository;
+	
+	@Autowired
+	InsuranceRepository insRepository;
 
 	@Value("${stripe.secret.key}")
 	private String secretKey;
@@ -57,11 +71,26 @@ public class StripeServiceH {
 		return Charge.create(chargeParams);
 	}
 	
-	public void affectPaymentToContract(int chargeId, int contractId) {
-		ChargeRequestH chargeRequest = chargeRepository.findById(chargeId).get();
+	public void affectPaymentToContract(ChargeRequestH chargeRequest, int contractId) {
 		Contract contract = contractRepository.findById(contractId).get();
 		if (!ObjectUtils.isEmpty(chargeRequest) && !ObjectUtils.isEmpty(contract)) {
 			chargeRequest.setContract(contract);
+			chargeRepository.save(chargeRequest);
+		}
+	}
+	
+	public void affectPaymentToSub(ChargeRequestH chargeRequest, int subId) {
+		Subscription subscription= subRepository.findById(subId).get();
+		if (!ObjectUtils.isEmpty(chargeRequest) && !ObjectUtils.isEmpty(subscription)) {
+			chargeRequest.setSubscription(subscription);
+			chargeRepository.save(chargeRequest);
+		}
+	}
+	
+	public void affectPaymentToInsurance(ChargeRequestH chargeRequest, int insId) {
+		Insurance insurance= insRepository.findById(insId).get();
+		if (!ObjectUtils.isEmpty(chargeRequest) && !ObjectUtils.isEmpty(insurance)) {
+			chargeRequest.setInsurance(insurance);
 			chargeRepository.save(chargeRequest);
 		}
 	}
@@ -139,5 +168,9 @@ public class StripeServiceH {
 
 	public List<ChargeRequestH> getAllRequests() {
 		return cr.findAll();
+	}
+	
+	public void deleteCharge(int chargeId){
+		cr.deleteById(chargeId);
 	}
 }

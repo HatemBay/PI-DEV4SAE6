@@ -14,8 +14,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tn.esprit.spring.contract.Contract;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.forniture.service.UserServiceImpl;
+import tn.esprit.spring.insurance.Insurance;
+import tn.esprit.spring.subscription.Subscription;
 
 @RestController
 public class UserController {
@@ -57,15 +60,15 @@ public class UserController {
 //		us.updateEmail(userId, email);
 //	}
 
-	@PutMapping("/users/affect-sub-seller/{subId}/{sellerId}")
-	public void affectSubToSeller(@PathVariable int subId, @PathVariable Long sellerId) {
-		us.affectSubToSeller(subId, sellerId);
+	@PostMapping("/subs/affect-sub-seller/{sellerId}")
+	public void affectSubToSeller(@RequestBody Subscription sub, @PathVariable Long sellerId) {
+		us.affectSubToSeller(sub, sellerId);
 		LOG.info("Subscription affected to seller");
 	}
 
-	@PutMapping("/users/affect-contract-seller/{contractId}/{sellerId}")
-	public void affectContractToSeller(@PathVariable int contractId, @PathVariable Long sellerId) {
-		us.affectContractToSeller(contractId, sellerId);
+	@PostMapping("/contracts/affect-contract-seller/{sellerId}")
+	public void affectContractToSeller(@RequestBody Contract contract, @PathVariable Long sellerId) {
+		us.affectContractToSeller(contract, sellerId);
 		LOG.info("Contract affected to seller");
 	}
 
@@ -94,6 +97,11 @@ public class UserController {
 	public double getUserPercentWithInsurances() {
 		return us.getUserPercentWithInsurances();
 	}
+	
+	@GetMapping("/users/percent-with-insurance-from-contracts")
+	public double getUserPercentWithInsurancesFromContracts() {
+		return us.getUserPercentWithInsurancesFromContracts();
+	}
 
 	@GetMapping("/users/percent-with-sub")
 	public double getSubbedUserPercent() {
@@ -117,11 +125,9 @@ public class UserController {
 		LOG.info("offerH affected to buyer");
 	}
 
-
-
-	@PutMapping("/users/affect-insurance-seller/{insuranceId}/{buyerId}")
-	public void affectInsuranceToSeller(@PathVariable int insuranceId, @PathVariable Long buyerId) {
-		us.affectInsuranceToBuyer(insuranceId, buyerId);
+	@PostMapping("/insurances/affect-insurance-seller/{buyerId}")
+	public void affectInsuranceToSeller(@RequestBody Insurance insurance, @PathVariable Long buyerId) {
+		us.affectInsuranceToBuyer(insurance, buyerId);
 		LOG.info("Insurance affected to buyer");
 	}
 

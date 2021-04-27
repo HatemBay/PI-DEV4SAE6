@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import tn.esprit.spring.contract.Contract;
 import tn.esprit.spring.insurance.Insurance;
@@ -39,10 +41,12 @@ public class ChargeRequestH {
 
 	@OneToOne
 	@JoinColumn(name = "insuranceId", referencedColumnName = "id")
+	@JsonIgnore
 	private Insurance insurance;
 
 	@OneToOne
 	@JoinColumn(name = "subId", referencedColumnName = "id")
+	@JsonIgnore
 	private Subscription subscription;
 
 }

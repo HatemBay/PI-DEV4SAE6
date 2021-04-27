@@ -12,8 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
-import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequestH;
 
@@ -41,11 +42,14 @@ public class Subscription implements Serializable {
 
 	private LocalDate finishDate;
 
-	private boolean fidelity;
+	private int fidelity;
 
 	private int state;
+	
+	private int payed;
 
 	@OneToOne(mappedBy = "subscription")
+	@JsonIgnore
 	private ChargeRequestH chargeRequest;
 
 	// private String mail;
@@ -54,9 +58,8 @@ public class Subscription implements Serializable {
 
 	@OneToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JsonIgnore
 	private User user;
-	
-	@OneToOne
-	private Commande commande;
+
 
 }

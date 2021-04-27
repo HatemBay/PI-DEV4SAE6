@@ -30,14 +30,14 @@ public class ContractController {
 	private static final Logger LOG = LoggerFactory.getLogger("LOG");
 
 	@Autowired
-	ContractServiceImpl cs;
+	ContractService cs;
 	@Autowired
 	private ServletContext servletContext;
 
 	private static final String DIRECTORY = "C:/Users/ASUS/Downloads/Documents";
 	private static final String DEFAULT_FILE_NAME = "real-estate-purchase-agreement.pdf";
 
-	@GetMapping("/download")
+	@GetMapping("contracts/download/contract_pdf")
 	public ResponseEntity<ByteArrayResource> downloadFile2(
 			@RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
 
@@ -97,10 +97,31 @@ public class ContractController {
 		LOG.info("Duration updated");
 		cs.updateContractDuration(contractId, duration);
 	}
+	
+	@PutMapping("/contracts/update/{contractId}")
+	public void updateContractDuration(@PathVariable int contractId, @RequestBody Contract contract) {
+		cs.updateContract(contractId, contract);
+		LOG.info("Contract updated");
+	}
+	
+	@GetMapping("/contracts/benefit")
+	public double getContractBenefitSum() {
+		return cs.getContractBenefitSum();
+	}
 
 	@DeleteMapping("/contracts/delete/{contractId}")
 	public void deleteContract(@PathVariable int contractId) {
 		cs.deleteContract(contractId);
+	}
+	
+	@GetMapping("/contracts/getLast")
+	public int getLastContract() {
+		return cs.getLastContract().getContractId();
+	}
+	
+	@GetMapping("/contracts/getByUser/{id}")
+	public List<Contract> getContractsByUser(@PathVariable int id) {
+		return cs.getContractsByUser(id);
 	}
 
 }

@@ -73,13 +73,5 @@ public class StripeControllerImpl {
 			throws AuthenticationException, InvalidRequestException, CardException, StripeException {
 		stripeSer.Pay(idCommande, idc, carta, expMonth, expYear, cvc);
 	}
-	
-	@PostMapping("pay/contract/{idContract}/{idc}")
-	public void PayContract(@PathVariable("idContract") int idContract, @PathVariable("idc") long idc,
-			@PathVariable("carta") String carta, @PathVariable("expMonth") int expMonth,
-			@PathVariable("expYear") int expYear, @PathVariable("cvc") String cvc)
-			throws AuthenticationException, InvalidRequestException, CardException, StripeException {
-		stripeSer.PayContract(idContract, idc, carta, expMonth, expYear, cvc);
-	}
 
 }

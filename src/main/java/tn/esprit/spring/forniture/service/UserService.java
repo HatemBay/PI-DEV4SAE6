@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.repository.query.Param;
 
 import tn.esprit.spring.forniture.entity.User;
+import tn.esprit.spring.insurance.Insurance;
 
 public interface UserService {
 
@@ -27,7 +28,7 @@ public interface UserService {
 
 	public void affectContractToSeller(int contractId, int sellerId);
 
-	public void affectInsuranceToBuyer(int insId, int buyerId);
+	public void affectInsuranceToBuyer(Insurance insurance, int buyerId);
 
 	// *****************JPQL*****************
 	public long getUserNumberWithOffer();

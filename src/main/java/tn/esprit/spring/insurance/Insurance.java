@@ -15,10 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.entity.User;
 import tn.esprit.spring.stripe.ChargeRequestH;
 
@@ -37,6 +37,8 @@ public class Insurance implements Serializable{
 	private int insId;
 	
 	private double price;
+		
+	private int payed;
 	
 	@Enumerated(EnumType.STRING)
 	private Partner partner;
@@ -45,13 +47,12 @@ public class Insurance implements Serializable{
     
     //to remove
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "insurance")
+    @JsonIgnore
 	private Set<ChargeRequestH> chargeRequest;
     
     @ManyToOne()
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-    
-    @OneToOne
-	private Commande commande;
+
     
 }

@@ -8,7 +8,7 @@ public interface RDVserviceInterface {
 	RDV addRDV(RDV rdv);
 	RDV updateRDV(RDV rdv);
 	void deleteRDV(Integer id);
-	Optional<RDV> findById(Integer id);
+	RDV findById(Integer id);
 	Optional<RDV> retrieveRDV(Integer id);
 	
 

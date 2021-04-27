@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,19 +15,23 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import tn.esprit.spring.contract.Contract;
 import tn.esprit.spring.insurance.Insurance;
 import tn.esprit.spring.subscription.Subscription;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 
 	private String FirstName;
@@ -36,15 +41,18 @@ public class User implements Serializable {
 	private Date dateNaissance;
 	private String Email;
 	private String Password;
-	
+
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Subscription sub;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-	//@Fetch(value=FetchMode.SELECT)
+	// @Fetch(value=FetchMode.SELECT)
+	@JsonIgnore
 	private Set<Contract> contracts;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Insurance> insurances;
 
 	@Override

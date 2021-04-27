@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import tn.esprit.spring.subscription.Subscription;
+
 @Service
 public interface InsuranceService {
 
@@ -14,6 +16,10 @@ public interface InsuranceService {
 	public List<Insurance> getAllInsurances();
 
 	public void updateInsurancePrice(int insId, double price);
+	
+	public void setInsurancePayed(int insId, int payed);
+	
+	public void updateInsurance(int insId, Insurance oldIns);
 
 	public void updateInsurancePartner(int insId, String partner);
 

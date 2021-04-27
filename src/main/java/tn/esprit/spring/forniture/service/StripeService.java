@@ -224,55 +224,54 @@ public class StripeService {
 
 	}
 	
-	@Transactional
-	public void PayContract(int idContract, long idc, String carta, int expMonth, int expYear, String cvc)
-			throws AuthenticationException, InvalidRequestException, CardException, StripeException {
-
-		Commande order = commandeRepository.commandeParIdclient1(idc);
-		contractService.setContractPayed(idContract);
-		
-//		System.out.println("orde  " + order);
-//		System.out.println("ordetotlale  " + order.getTotal());
-
-		// LigneCommande ligne=
-		// ligneCommandeRepository.getLigneCommandByUserId1(idc);
-		// System.out.println("ligne "+ligne);
-		if (order.getStatus().contentEquals("IN_PROGRESS")) {
-			Map<String, Object> params = new HashMap<>();
-			Map<String, Object> tokenParams = new HashMap<>();
-			Map<String, Object> cardParams = new HashMap<>();
-			Stripe.apiKey = "sk_test_51ITZGtLl5l7ZEYZMMkq6Qoqmm6NP52miIX5wnjDAtAXBhB7sFWHuwgyZzB28d5TpkrHzlmfoeXq9R6UAGiP3330c00HpmjXByh";
-			cardParams.put("number", carta);
-			cardParams.put("exp_month", expMonth);
-			cardParams.put("exp_year", expYear);
-			cardParams.put("cvc", cvc);
-			int nMontant = (int) order.getTotal() * 100;
-			tokenParams.put("card", cardParams);
-			Token token = Token.create(tokenParams);
-			// System.out.println(token.getCard().getId());
-			if (token.getId() != null) {
-				params.put("amount", nMontant);
-				params.put("description", "payement en ligne avec stripe");
-				params.put("currency", "eur");
-				params.put("source", token.getId());
-
-				Charge.create(params);
-
-				// params.put(
-				// "charge",
-				// "ch_1Ia53bLl5l7ZEYZMDrrHubCm"
-				// );
-
-				// Refund refund = Refund.create(params);
-				// Refund.create(params);
-			}
-
-		}
-
-		// String a="EN_LIGNE";
-		// Commande f=commandeServiceImpl.saveCommande(idc, ligne.getId(),a );
-		// System.out.println("Commande "+f);
-
-
-	}
+//	@Transactional
+//	public void PayContract(int idContract, long idc, String carta, int expMonth, int expYear, String cvc)
+//			throws AuthenticationException, InvalidRequestException, CardException, StripeException {
+//
+//		Commande order = commandeRepository.commandeParIdclient1(idc);
+//		
+////		System.out.println("orde  " + order);
+////		System.out.println("ordetotlale  " + order.getTotal());
+//
+//		// LigneCommande ligne=
+//		// ligneCommandeRepository.getLigneCommandByUserId1(idc);
+//		// System.out.println("ligne "+ligne);
+//		if (order.getStatus().contentEquals("IN_PROGRESS")) {
+//			Map<String, Object> params = new HashMap<>();
+//			Map<String, Object> tokenParams = new HashMap<>();
+//			Map<String, Object> cardParams = new HashMap<>();
+//			Stripe.apiKey = "sk_test_51ITZGtLl5l7ZEYZMMkq6Qoqmm6NP52miIX5wnjDAtAXBhB7sFWHuwgyZzB28d5TpkrHzlmfoeXq9R6UAGiP3330c00HpmjXByh";
+//			cardParams.put("number", carta);
+//			cardParams.put("exp_month", expMonth);
+//			cardParams.put("exp_year", expYear);
+//			cardParams.put("cvc", cvc);
+//			int nMontant = (int) order.getTotal() * 100;
+//			tokenParams.put("card", cardParams);
+//			Token token = Token.create(tokenParams);
+//			// System.out.println(token.getCard().getId());
+//			if (token.getId() != null) {
+//				params.put("amount", nMontant);
+//				params.put("description", "payement en ligne avec stripe");
+//				params.put("currency", "eur");
+//				params.put("source", token.getId());
+//
+//				Charge.create(params);
+//
+//				// params.put(
+//				// "charge",
+//				// "ch_1Ia53bLl5l7ZEYZMDrrHubCm"
+//				// );
+//
+//				// Refund refund = Refund.create(params);
+//				// Refund.create(params);
+//			}
+//
+//		}
+//
+//		// String a="EN_LIGNE";
+//		// Commande f=commandeServiceImpl.saveCommande(idc, ligne.getId(),a );
+//		// System.out.println("Commande "+f);
+//
+//
+//	}
 }

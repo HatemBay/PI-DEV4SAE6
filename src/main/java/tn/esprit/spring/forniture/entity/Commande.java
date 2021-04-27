@@ -54,16 +54,7 @@ public class Commande  implements Serializable {
 	
 	@OneToOne(mappedBy="commande")
 	private Factures facture;
-	
-	@OneToOne(mappedBy = "commande")
-	private Subscription sub;
-	
-	@OneToOne(mappedBy = "commande")
-	private Contract contract;
-	
-	@OneToOne(mappedBy = "commande")
-	private Insurance insurance;
-	
+
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	  private User idUser;

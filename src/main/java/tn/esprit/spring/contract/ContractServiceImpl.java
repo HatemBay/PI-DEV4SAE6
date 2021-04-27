@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import tn.esprit.spring.exception.NotSubscribedException;
 import tn.esprit.spring.forniture.repository.UserRepository;
 import tn.esprit.spring.surveillance.SurveillanceImages;
 import tn.esprit.spring.surveillance.SurveillanceRepository;
@@ -26,21 +27,18 @@ public class ContractServiceImpl implements ContractService {
 
 	@Override
 	public int addContract(Contract contract) {
+		if (contract.getStartDate().compareTo(LocalDate.now()) < 0){
+			throw new NotSubscribedException("Please provide a future date!");
+		}
 		if (contract.getStartDate() == null) {
 			contract.setStartDate(LocalDate.now());
 		}
-		contract.setPayed(0);
-		if (contract.getDuration() <= 3) {
-			contract.setPrice(15);
-		} else if (contract.getDuration() <= 6) {
-			contract.setPrice(25);
-		} else if (contract.getDuration() <= 12) {
-			contract.setPrice(30);
-		}
-		contract.setTotalPrice(contract.getPrice() * 0.01);
+
+		double price = contract.getPrice() + contract.getPrice() * 0.01;
+		contract.setTotalPrice(price);
 
 		if (contract.getSurveillance() == 1) {
-			contract.setTotalPrice(contract.getPrice() + 10);
+			contract.setTotalPrice(price + 10);
 		}
 		return cr.save(contract).getContractId();
 	}
@@ -59,13 +57,13 @@ public class ContractServiceImpl implements ContractService {
 	public void updateContractPrice(int contractId, float price) {
 		Contract oldContract = findContract(contractId);
 		oldContract.setPrice(price);
-		addContract(oldContract);
+		cr.save(oldContract);
 	}
 	
 	@Override
-	public void setContractPayed(int contractId) {
+	public void setContractPayed(int contractId, int payed) {
 		Contract oldContract = findContract(contractId);
-		oldContract.setPayed(1);
+		oldContract.setPayed(payed);
 		addContract(oldContract);
 	}
 
@@ -98,6 +96,22 @@ public class ContractServiceImpl implements ContractService {
 	}
 
 	@Override
+	public void updateContract(int contractId, Contract oldContract) {
+		Contract cnt = findContract(contractId);
+		if(oldContract != null){
+			if (oldContract.getPrice() != 0) {
+				cnt.setPrice(oldContract.getPrice());
+			}
+			if (oldContract.getSurveillance() != 0) {
+				cnt.setSurveillance(oldContract.getSurveillance());
+			}
+			cnt.setPayed(oldContract.getPayed());
+
+			addContract(cnt);
+		}
+	}
+	
+	@Override
 	public void affectImageToContract(SurveillanceImages image, int contractId) {
 		Contract contract = cr.findById(contractId).get();
 		if (!ObjectUtils.isEmpty(contract) && !ObjectUtils.isEmpty(image)) {
@@ -107,11 +121,25 @@ public class ContractServiceImpl implements ContractService {
 	}
 
 	@Override
+	public Contract getLastContract() {
+		return cr.getContractsDesc();
+	}
+	
+	@Override
+	public List<Contract> getContractsByUser(int id){
+		return cr.getContractsByUser(id);
+	}
+	
+	@Override
 	public long getContractsNumberJPQL() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	public double getContractBenefitSum() {
+		return cr.getContractBenefitSum();
+	}
+	
 	@Override
 	public void deleteContract(int contractId) {
 		cr.deleteById(contractId);

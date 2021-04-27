@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RDVrepository extends CrudRepository<RDV,Integer> {
-	Optional<RDV> findById(Integer id);
+	
 }

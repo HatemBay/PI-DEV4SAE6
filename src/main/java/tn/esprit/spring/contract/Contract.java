@@ -14,15 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
-import tn.esprit.spring.forniture.entity.Commande;
 import tn.esprit.spring.forniture.entity.User;
-import tn.esprit.spring.stripe.ChargeRequestH;
 import tn.esprit.spring.surveillance.SurveillanceImages;
 
 @Data
@@ -52,17 +50,16 @@ public class Contract implements Serializable {
 	
 	private int payed;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contract", cascade = CascadeType.ALL)
-	private Set<ChargeRequestH> chargeRequest;
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contract", cascade = CascadeType.ALL)
+//	private Set<ChargeRequestH> chargeRequest;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contract", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<SurveillanceImages> surveillanceImages;
-	
-	@OneToOne
-	private Commande commande;
 
 }

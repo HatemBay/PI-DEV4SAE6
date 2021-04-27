@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.subscription.Subscription;
+
 
 @RestController
 public class InsuranceController {
@@ -48,6 +50,12 @@ private static final Logger LOG = LoggerFactory.getLogger("LOG");
 	public void updateInsurancePartner(@PathVariable int insId, @PathVariable String partner){
 		LOG.info("Insurance updated");
 		is.updateInsurancePartner(insId, partner);
+	}
+	
+	@PutMapping("/insurances/update/{insId}")
+	public void updateSub(@PathVariable int insId,@RequestBody Insurance oldIns){
+		is.updateInsurance(insId, oldIns);
+		LOG.info("Insurance updated");
 	}
 	
 	@GetMapping("/insurances/nb")

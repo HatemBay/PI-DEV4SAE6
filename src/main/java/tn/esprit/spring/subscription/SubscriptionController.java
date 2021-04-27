@@ -48,9 +48,20 @@ public class SubscriptionController {
 		ss.updateSubStartDate(subId, date);
 	}
 	
+	@PutMapping("/subs/update/{subId}")
+	public void updateSub(@PathVariable int subId,@RequestBody Subscription oldSub){
+		ss.updateSub(subId, oldSub);
+		LOG.info("Sub updated");
+	}
+	
 	@DeleteMapping("/subs/delete/{subId}")
 	public void deleteSub(@PathVariable int subId){
 		ss.deleteSub(subId);
+	}
+	
+	@GetMapping("/subs/getlast")
+	public int getLastSub(){
+		return ss.getLastSub().getSubId();
 	}
 	
 }

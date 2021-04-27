@@ -4,13 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.forniture.repository.UserRepository;
-
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
@@ -61,6 +58,31 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
+	public void setSubPayed(int subId, int payed) {
+		Subscription oldSub = findSub(subId);
+		oldSub.setPayed(payed);
+		addSub(oldSub);
+	}
+
+	@Override
+	public void updateSub(int subId, Subscription oldSub) {
+		Subscription sub = findSub(subId);
+		if(oldSub != null){
+			if (oldSub.getDuration() != 0) {
+				sub.setDuration(oldSub.getDuration());
+			}
+			if (oldSub.getPrice() != 0) {
+				sub.setPrice(oldSub.getPrice());
+			}
+			sub.setState(oldSub.getState());
+			sub.setFidelity(oldSub.getFidelity());
+			sub.setPayed(oldSub.getPayed());
+
+			addSub(sub);
+		}
+	}
+
+	@Override
 	public void updateSubStartDate(int subId, String date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
 		LocalDate localDate = LocalDate.parse(date, formatter);
@@ -69,6 +91,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		addSub(oldSub);
 	}
 
+	@Override
+	public Subscription getLastSub() {
+		return sr.getSubsDesc();
+
+	}
+	
 	@Override
 	public void affectSubToBuyer(int subId, int buyerId) {
 		// TODO Auto-generated method stub

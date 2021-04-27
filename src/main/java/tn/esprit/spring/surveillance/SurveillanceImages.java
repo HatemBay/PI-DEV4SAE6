@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 import tn.esprit.spring.contract.Contract;
@@ -38,6 +40,7 @@ public class SurveillanceImages implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
+	@JsonIgnore
 	private Contract contract;	
 	
 }

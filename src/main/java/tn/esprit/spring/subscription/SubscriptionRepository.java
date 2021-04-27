@@ -16,4 +16,9 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Inte
 	@Query(value= "Select count(*) FROM subscription s WHERE s.type like ?1", 
 			nativeQuery=  true)
 	public long getSubNumberByType(String type);
+	
+	@Query(value= "select * from subscription s order by s.id desc limit 1", 
+			nativeQuery=  true)
+	public Subscription getSubsDesc();
+	
 }

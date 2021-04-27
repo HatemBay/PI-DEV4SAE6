@@ -18,12 +18,12 @@ public class InsuranceServiceImpl implements InsuranceService {
 	@Autowired
 	UserRepository ur;
 
+
 	@Override
 	public int addInsurance(Insurance ins) {
 		if (ins.getStartDate() == null) {
 			ins.setStartDate(LocalDate.now());
 		}
-
 		return ir.save(ins).getInsId();
 	}
 
@@ -42,6 +42,29 @@ public class InsuranceServiceImpl implements InsuranceService {
 		Insurance oldIns = findInsurance(insId);
 		oldIns.setPrice(price);
 		addInsurance(oldIns);
+	}
+	
+	@Override
+	public void setInsurancePayed(int insId, int payed) {
+		Insurance oldIns = findInsurance(insId);
+		oldIns.setPayed(payed);
+		addInsurance(oldIns);
+	}
+	
+	@Override
+	public void updateInsurance(int insId, Insurance oldIns) {
+		Insurance ins = findInsurance(insId);
+		if(oldIns != null){
+			if (oldIns.getPrice() != 0) {
+				ins.setPrice(oldIns.getPrice());
+			}
+			if (oldIns.getPartner() != null) {
+				ins.setPartner(oldIns.getPartner());
+			}
+			ins.setPayed(oldIns.getPayed());
+
+			addInsurance(ins);
+		}
 	}
 
 	@Override

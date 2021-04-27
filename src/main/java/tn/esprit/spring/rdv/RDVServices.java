@@ -37,9 +37,9 @@ public class RDVServices implements RDVserviceInterface {
 	}
 
 	@Override
-	public Optional<RDV> findById(Integer id) {
+	public RDV findById(Integer id) {
 		// TODO Auto-generated method stub
-		return rr.findById(id);
+		return rr.findById(id).orElse(null);
 	}
 
 	@Override

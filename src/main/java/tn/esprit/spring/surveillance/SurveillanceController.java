@@ -34,4 +34,9 @@ public class SurveillanceController{
 	public void stop() {
 		detectMotion.stop();
 	}
+	
+	@GetMapping("contract/{contractId}/surveillance/get-all")
+	public List<SurveillanceImages> getAllImages() {
+		return detectMotion.getAllImages();
+	}
 }

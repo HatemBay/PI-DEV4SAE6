@@ -5,7 +5,7 @@ import javax.servlet.ServletContext;
 import org.springframework.http.MediaType;
 
 public class PdfContractModel {
-
+	
     public static MediaType getMediaTypeForFileName(ServletContext servletContext, String fileName) {
 
         String mineType = servletContext.getMimeType(fileName);

@@ -16,10 +16,16 @@ public interface SubscriptionService {
 	// public void updateSubType(int subId, String type);
 
 	public void updateSubPrice(int subId, double price);
+	
+	public void setSubPayed(int subId, int payed);
+	
+	public void updateSub(int subId, Subscription oldSub);
 
 	public void updateSubStartDate(int subId, String date);
 
 	public void affectSubToBuyer(int subId, int buyerId);
+	
+	public Subscription getLastSub();
 
 	// *****************JPQL*****************
 	// public long getSubNumberByType(String type);
